@@ -1,0 +1,72 @@
+@use "../../styles/variables.scss";
+
+.button {
+    border: 0;
+    border-radius: .5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+
+    &.primary {
+        background-color: var(--color-primary);
+        color: white;
+    }
+
+    &.secondary {
+        border: 2px solid var(--color-secondary);
+        background-color: transparent;
+        color: var(--color-secondary);
+    }
+
+    &.tertiary {
+        background-color: var(--color-tertiary);
+        color: var(--color-primary);
+        padding: 12px 12px;
+    }
+
+    &.primary:hover {
+        background-color: #102746;
+    }
+
+    &.secondary:hover {
+        border: 2px solid var(--color-disabled);
+        color: var(--color-disabled);
+    }
+
+    &.tertiary:hover {
+        background-color: #102746;
+        color: white;
+    }
+
+    &.active {
+        background-color: #e0e0e0;
+    }
+
+    .icon {
+        margin-left: 8px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+
+    &.sm {
+        width: 80px;
+    }
+
+    &.md {
+        width: 120px;
+    }
+
+    &.lg {
+        width: 150px;
+    }
+
+    &.xl {
+        width: 250px;
+    }
+}

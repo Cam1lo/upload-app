@@ -1,0 +1,26 @@
+.radio {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+
+    .title {
+        font-weight: bold;
+    }
+
+    .options-group {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: .5rem;
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+
+            input {
+                cursor: pointer;
+            }
+        }
+    }
+}

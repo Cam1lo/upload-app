@@ -1,0 +1,39 @@
+.modal-body {
+    height: 35rem;
+    // background-color: green;
+    display: flex;
+    justify-content: space-around;
+    margin: 3rem 2rem;
+
+    .row1 {
+        // background-color: red;
+        flex-grow: 5;
+    }
+
+    .row2 {
+        // background-color: blue;
+        flex-grow: 4;
+        padding: 0 3rem;
+    }
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 6rem 0 2rem 0;
+    font-weight: 900;
+    color: #1c3e6e;
+
+
+    .buttons-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1.6rem;
+        gap: 1.3rem;
+    }
+}

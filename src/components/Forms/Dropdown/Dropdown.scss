@@ -1,0 +1,15 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    select {
+        width: 100%;
+        // background-color: aquamarine;
+        padding: 16px 12px;
+        font-size: large;
+        font-weight: bold;
+        color: var(--color-primary);
+        border-radius: .5rem;
+    }
+}

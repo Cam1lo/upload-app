@@ -1,0 +1,65 @@
+@use 'variables.scss';
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../../public/assets/fonts/Raleway/static/Raleway-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../../public/assets/fonts/Raleway/static/Raleway-ExtraBold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: bold;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: white;
+    height: 100vh;
+    margin: 0;
+    font-size: large;
+    color: var(--color-primary);
+    font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.border-bottom::after {
+    content: "";
+    display: block;
+    width: 100%;
+    max-width: 23rem;
+    height: 2px;
+    background-color: #ccc;
+    margin-top: 1.3rem;
+}
+
+input[type='radio'] {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    outline: none;
+}
+
+input[type='radio']:before {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: 20% auto;
+    border-radius: 50%;
+}
+
+.input[type='radio']:checked:before {
+    background-color: #cc3737;
+}
