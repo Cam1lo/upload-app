@@ -2,8 +2,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import "./RadioButtonsGroup.scss";
-import { RadioButtonsGroupProps } from "./RadioButtonsGroup.type";
+import "./radio-buttons-group.scss";
+import { RadioButtonsGroupProps } from "./radio-buttons-group.type";
 
 export default function RadioButtonsGroup({ options, formControl, title }: RadioButtonsGroupProps) {
     return (

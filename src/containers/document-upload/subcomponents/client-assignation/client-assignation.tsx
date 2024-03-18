@@ -1,7 +1,7 @@
-import Dropdown from "../../../../components/Forms/Dropdown/Dropdown";
-import Time from "../../../../components/Forms/Time/Time";
-import "./ClientAssignation.scss";
-import { ClientAssignationProps } from "./ClientAssignation.type";
+import Time from "../../../../components/forms/time/time";
+import Dropdown from "../../../../components/forms/dropdown/dropdown";
+import "./client-assignation.scss";
+import { ClientAssignationProps } from "./client-assignation.type";
 
 function ClientAssignation({ clientAssignation, dropDownformControl, timeFormControl }: ClientAssignationProps) {
     return (

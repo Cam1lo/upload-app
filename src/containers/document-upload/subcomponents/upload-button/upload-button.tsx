@@ -1,4 +1,4 @@
-import "./UploadButton.scss";
+import "./upload-button.scss";
 import UploadIcon from "../../../../assets/icons/file-upload.png";
 
 function UploadButton({ uploadDocumentOnClick }: { uploadDocumentOnClick: () => void }) {

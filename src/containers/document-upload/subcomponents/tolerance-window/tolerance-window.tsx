@@ -1,7 +1,7 @@
-import Time from "../../../../components/Forms/Time/Time";
-import Toggle from "../../../../components/Forms/Toggle/Toggle";
-import "./ToleranceWindow.scss";
-import { ToleranceWindowProps } from "./ToleranceWindow.type";
+import Time from "../../../../components/forms/time/time";
+import Toggle from "../../../../components/forms/toggle/toggle";
+import "./tolerance-window.scss";
+import { ToleranceWindowProps } from "./tolerance-window.type";
 
 function ToleranceWindow({ toggleformControl, timeFormControl }: ToleranceWindowProps) {
     return (

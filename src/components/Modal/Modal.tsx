@@ -1,8 +1,8 @@
-import Button from "../Button/Button";
-import "./Modal.scss";
+import Button from "../button/button";
+import "./modal.scss";
 import CloseIcon from "../../assets/icons/close.png";
-import { ModalProps } from "./Modal.type";
-import { ButtonSize, ButtonType } from "../Button/Button.type";
+import { ModalProps } from "./modal.type";
+import { ButtonSize, ButtonType } from "../button/button.type";
 
 function Modal({ title, children, onClose, isOpen }: ModalProps) {
     return isOpen ? (

@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
-import "./Toggle.scss";
-import { ToggleProps } from "./Toggle.type";
+import "./toggle.scss";
+import { ToggleProps } from "./toggle.type";
 
 function Toggle({ title, formControl, label }: ToggleProps) {
     const IOSSwitch = styled((props: SwitchProps) => (

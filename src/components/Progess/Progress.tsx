@@ -1,4 +1,4 @@
-import "./Progress.scss";
+import "./progress.scss";
 import FileIcon from "../../assets/icons/file-image.png";
 
 function Progress() {

@@ -1,10 +1,10 @@
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import "./Time.scss";
+import "./time.scss";
 import { useState } from "react";
 import { getTimeGivenDate } from "../../../utils/utils";
 import TimeIcon from "../../../assets/icons/time.png";
-import { TimeProps } from "./Time.type";
+import { TimeProps } from "./time.type";
 
 function Time({ label, formControl }: TimeProps) {
     const [isOpened, setIsOpened] = useState(false);

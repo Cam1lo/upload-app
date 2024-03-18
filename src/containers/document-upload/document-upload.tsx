@@ -1,24 +1,24 @@
 import { useState } from "react";
-import Button from "../../components/Button/Button";
-import Modal from "../../components/Modal/Modal";
-import "./DocumentUpload.scss";
-import Dropdown from "../../components/Forms/Dropdown/Dropdown";
-import UploadButton from "./subcomponents/UploadButton/UploadButton";
-import Validators from "../../core/Validators";
-import RadioButtonsGroup from "../../components/Forms/RadioButtonsGroup/RadioButtonsGroup";
-import Check from "../../components/Check/Check";
-import ToleranceWindow from "./subcomponents/ToleranceWindow/ToleranceWindow";
-import File from "../File/File";
-import ClientAssignation from "./subcomponents/ClientAssignation/ClientAssignation";
+import Button from "../../components/button/button";
+import "./document-upload.scss";
+import Check from "../../components/check/check";
 import {
     DEFAULT_FORM_STATE,
     MULTIPLE_TESTING_CENTERS,
     SINGLE_TESTING_CENTER,
 } from "../../core/constants/document-upload";
 import { DocumentUploadFormState } from "../../core/interfaces/IDocumentUploadFormState";
-import { CheckColors } from "../../components/Check/Check.type";
-import { ButtonType, ButtonSize } from "../../components/Button/Button.type";
+import { CheckColors } from "../../components/check/check.type";
+import { ButtonType, ButtonSize } from "../../components/button/button.type";
 import IClientAssignation from "../../core/interfaces/IClientAssignation";
+import Dropdown from "../../components/forms/dropdown/dropdown";
+import RadioButtonsGroup from "../../components/forms/radio-buttons-group/radio-buttons-group";
+import Validators from "../../core/Validators";
+import ClientAssignation from "./subcomponents/client-assignation/client-assignation";
+import ToleranceWindow from "./subcomponents/tolerance-window/tolerance-window";
+import UploadButton from "./subcomponents/upload-button/upload-button";
+import Modal from "../../components/modal/modal";
+import File from "../file/file";
 
 function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentUploadFormState) => void }) {
     const [isOpen, setIsOpen] = useState(true);
@@ -70,7 +70,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                         <ToleranceWindow
                             toggleformControl={{
                                 value: formState.toleranceWindow || false,
-                                onChange: (value) => {
+                                onChange: (value: boolean) => {
                                     setFormState((prev: DocumentUploadFormState) => ({
                                         ...prev,
                                         toleranceWindow: value === true,
@@ -80,7 +80,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             }}
                             timeFormControl={{
                                 value: formState.toleranceWindowTime || null,
-                                onChange: (value) => {
+                                onChange: (value: Date) => {
                                     setFormState((prev: DocumentUploadFormState) => ({
                                         ...prev,
                                         toleranceWindowTime: value,
@@ -152,7 +152,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                       clientAssignation={client}
                                       timeFormControl={{
                                           value: client.time || null,
-                                          onChange: (value) => {
+                                          onChange: (value: Date) => {
                                               setFormState((prev: DocumentUploadFormState) => {
                                                   const newClientList = [...(prev.clientList || [])];
                                                   newClientList[index].time = value;

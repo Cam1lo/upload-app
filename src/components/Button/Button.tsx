@@ -1,5 +1,5 @@
-import { ButtonProps, ButtonSize, ButtonType } from "./Button.type";
-import "./Button.scss";
+import { ButtonProps, ButtonSize, ButtonType } from "./button.type";
+import "./button.scss";
 
 function Button({ children, onclick, size = ButtonSize.MD, backgroundColor, type = ButtonType.PRIMARY }: ButtonProps) {
     return (

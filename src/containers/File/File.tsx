@@ -1,5 +1,5 @@
-import Progress from "../../components/Progess/Progress";
-import Upload from "../../components/Upload/Upload";
+import Progress from "../../components/progess/progress";
+import Upload from "../../components/upload/upload";
 
 function File() {
     return (

@@ -1,4 +1,4 @@
-import { DropdownOption } from "../../components/Forms/Dropdown/Dropdown.type";
+import { DropdownOption } from "../../components/forms/dropdown/dropdown.type";
 import IClientAssignation from "../interfaces/IClientAssignation";
 import { ClientType, DocumentUploadFormState } from "../interfaces/IDocumentUploadFormState";
 

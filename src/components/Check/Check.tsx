@@ -1,5 +1,5 @@
-import "./Check.scss";
-import { CheckProps } from "./Check.type";
+import "./check.scss";
+import { CheckProps } from "./check.type";
 
 function Check({ title, status }: CheckProps) {
     return (

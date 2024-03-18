@@ -1,7 +1,7 @@
-import Button from "../Button/Button";
-import "./Upload.scss";
+import Button from "../button/button";
+import "./upload.scss";
 import FileIcon from "../../assets/icons/file.png";
-import { ButtonSize, ButtonType } from "../Button/Button.type";
+import { ButtonSize, ButtonType } from "../button/button.type";
 
 function Upload() {
     const triggerInputFile = () => {

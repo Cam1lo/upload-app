@@ -1,5 +1,5 @@
-import "./Dropdown.scss";
-import { DropdownProps } from "./Dropdown.type";
+import "./dropdown.scss";
+import { DropdownProps } from "./dropdown.type";
 
 function Dropdown({ options, formControl, bottomBorder = true }: DropdownProps) {
     return (
