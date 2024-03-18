@@ -5,7 +5,7 @@ export default interface DocumentUploadFormState {
     file?: File;
     elapsedDates: boolean;
     toleranceWindow: boolean;
-    toleranceWindowTime: string;
+    toleranceWindowTime: Date | null;
     splitSchedule: boolean;
     locationChecked: boolean;
     clientType: "Single" | "Multiple";

@@ -36,7 +36,7 @@ export const DEFAULT_FORM_STATE: DocumentUploadFormState = {
     elapsedDates: false,
     file: undefined,
     toleranceWindow: true,
-    toleranceWindowTime: '',
+    toleranceWindowTime: null,
     splitSchedule: true,
     locationChecked: true,
     clientType: "Multiple",

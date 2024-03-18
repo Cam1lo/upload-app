@@ -3,12 +3,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "./Time.scss";
 import { useState } from "react";
 import { getTimeGivenDate } from "../../../utils/utils";
+import IFormControl from "../../../core/interfaces/IFormControl";
 
 type Props = {
     label: string;
+    formControl: IFormControl<Date | null>;
 };
 
-function Time({ label }: Props) {
+function Time({ label, formControl }: Props) {
     const [isOpened, setIsOpened] = useState(false);
     const [_label, setLabel] = useState(label);
     const triggerTimePicker = () => {
@@ -25,6 +27,7 @@ function Time({ label }: Props) {
                         onChange={(e: any) => {
                             if (e.$d) {
                                 setLabel(getTimeGivenDate(e.$d));
+                                formControl.onChange(e.$d);
                             }
                         }}
                         onAccept={() => {

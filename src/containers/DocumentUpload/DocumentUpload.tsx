@@ -65,12 +65,22 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                         />
 
                         <ToleranceWindow
-                            formControl={{
+                            toggleformControl={{
                                 value: formState.toleranceWindow || false,
                                 onChange: (value) => {
                                     setFormState((prev) => ({
                                         ...prev,
                                         toleranceWindow: value === true,
+                                    }));
+                                },
+                                validators: [Validators.required],
+                            }}
+                            timeFormControl={{
+                                value: formState.toleranceWindowTime || null,
+                                onChange: (value) => {
+                                    setFormState((prev) => ({
+                                        ...prev,
+                                        toleranceWindowTime: value,
                                     }));
                                 },
                                 validators: [Validators.required],
@@ -125,8 +135,8 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                         {formState.clientList && formState.clientList.length > 0
                             ? formState.clientList.map((client, index) => (
                                   <ClientAssignation
-                                      formControl={{
-                                          value: client.time || "",
+                                      dropDownformControl={{
+                                          value: client.name || "",
                                           onChange: (event: any) => {
                                               setFormState((prev) => {
                                                   const newClientList = [...(prev.clientList || [])];
@@ -137,6 +147,17 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                           validators: [Validators.required],
                                       }}
                                       clientAssignation={client}
+                                      timeFormControl={{
+                                          value: client.time || null,
+                                          onChange: (value) => {
+                                              setFormState((prev) => {
+                                                  const newClientList = [...(prev.clientList || [])];
+                                                  newClientList[index].time = value;
+                                                  return { ...prev, clientList: newClientList };
+                                              });
+                                          },
+                                          validators: [Validators.required],
+                                      }}
                                       key={index}
                                   />
                               ))
