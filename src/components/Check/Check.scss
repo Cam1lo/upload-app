@@ -1,0 +1,34 @@
+.check {
+    .title {
+        font-weight: bold;
+    }
+
+    .label {
+        margin-top: .75rem;
+        font-weight: 600;
+    }
+
+    .success {
+        color: #0f9d57;
+    }
+
+    .warning {
+        color: #ff9800;
+    }
+
+    .error {
+        color: #f44336;
+    }
+
+    .info {
+        color: #2196f3;
+    }
+
+    .default {
+        color: #9e9e9e;
+    }
+
+    .disabled {
+        color: #e0e0e0;
+    }
+}

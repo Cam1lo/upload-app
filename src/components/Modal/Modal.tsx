@@ -12,7 +12,7 @@ function Modal({ title, children, onClose, isOpen }: Props) {
     return isOpen ? (
         <div className="wrapper">
             <div className="modal">
-                <Button type="tertiary" backgroundColor="#041d58" onclick={onClose}>
+                <Button type="tertiary" size="xs" backgroundColor="#041d58" onclick={onClose}>
                     <img src="/assets/icons/close.png" alt="" height={18} width={19} />
                 </Button>
                 <div className="content">

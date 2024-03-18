@@ -1,0 +1,22 @@
+.client-assignation {
+    display: flex;
+    // background-color: black;
+    gap: 3rem;
+    align-items: center;
+
+    .left {
+        display: flex;
+        flex: 2;
+        max-width: 12rem;
+
+        // overwriting font weight on dropdown component
+        .dropdown>select {
+            width: 12rem;
+            min-width: 9rem;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+    }
+
+}

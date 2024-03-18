@@ -1,6 +1,6 @@
-import Validators from "./Validators";
+import Validators from "../Validators";
 
-export default interface FormControl<T> {
+export default interface IFormControl<T> {
     value: T;
     onChange: (event: any) => void;
     validators?: Validators[];

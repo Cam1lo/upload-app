@@ -16,23 +16,39 @@
         border-radius: 2%;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
         width: 90%;
-        max-width: 75rem;
+        max-width: 80rem;
 
         .content {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            height: 80%;
             width: 100%;
 
             h1 {
-                color: var(--color-primary);
+                color: #042849;
+                font-size: 2.1rem;
             }
 
             .body {
                 width: 100%;
             }
+        }
+    }
+}
+
+@media (max-width: 1120px) {
+    .wrapper {
+        align-items: flex-start;
+        background-color: white;
+        overflow-y: scroll;
+
+        .modal {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 1rem;
         }
     }
 }

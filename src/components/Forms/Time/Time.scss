@@ -1,0 +1,23 @@
+.time {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .label {
+        font-weight: 600;
+        margin-left: -.3rem;
+    }
+
+    .hidden {
+        visibility: hidden;
+        width: 0px !important;
+        overflow: hidden;
+        position: absolute;
+    }
+}

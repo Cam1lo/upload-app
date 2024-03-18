@@ -1,0 +1,15 @@
+.radio {
+    display: flex;
+    flex-direction: column;
+    // gap: rem;
+
+    .title {
+        font-weight: bold;
+    }
+
+    .options-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: .4rem;
+    }
+}
