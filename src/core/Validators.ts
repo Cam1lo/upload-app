@@ -1,17 +1,35 @@
+import IClientAssignation from "./interfaces/IClientAssignation";
+import { IValidator } from "./interfaces/IValidator";
+
 export default class Validators {
-    static required(value: string): boolean {
-        return value.trim() !== "";
+    static required: IValidator = {
+        validate: (value: any) => {
+            if (value === null || value === undefined) {
+                return false;
+            }
+
+            if (typeof value === "string" && value.trim() === "") {
+                return false;
+            }
+
+            return true;
+
+        },
+        errorMsg: "This field is required!",
     }
-    static minLength(value: string, minLength: number): boolean {
-        return value.length >= minLength;
-    }
-    static maxLength(value: string, maxLength: number): boolean {
-        return value.length <= maxLength;
-    }
-    static isEmail(value: string): boolean {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    }
-    static isNumber(value: string): boolean {
-        return /^[0-9]+$/.test(value);
+
+    static allCentersAssignedWithTime: IValidator = {
+        validate: (clientAssignations: IClientAssignation[]) => {
+            let valid = true;
+            clientAssignations.forEach((clientAssignation: IClientAssignation) => {
+                if (!clientAssignation.name || !clientAssignation.time) {
+                    valid = false;
+                    return;
+                }
+            });
+            return valid;
+        },
+        errorMsg: "Each center must have a client and a time assigned!",
     }
 }
+

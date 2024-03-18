@@ -2,7 +2,7 @@ import IClientAssignation from "./IClientAssignation";
 
 interface DocumentUploadFormState {
     importName: string;
-    file?: File;
+    file: File | null;
     elapsedDates: boolean;
     toleranceWindow: boolean;
     toleranceWindowTime: Date | null;
@@ -10,6 +10,7 @@ interface DocumentUploadFormState {
     locationChecked: boolean;
     clientType: ClientType;
     clientList: IClientAssignation[];
+    touched: boolean;
 };
 
 enum ClientType {

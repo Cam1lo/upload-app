@@ -56,3 +56,29 @@
         }
     }
 }
+
+@media (max-width: 640px) {
+    .modal-body {
+        margin: 3rem 1rem;
+        gap: 3rem;
+
+        .row1,
+        .row2 {
+            width: 100%;
+            padding: .4rem;
+        }
+    }
+
+    .modal-footer {
+        margin: 3rem 0 2rem 0;
+
+        .buttons-container {
+            flex-direction: column;
+            gap: 1.3rem;
+
+            .button {
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,13 +1,27 @@
 .tolerance-window {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    gap: .5rem;
+
+    .title {
+        font-weight: bold;
+    }
+
+    .tolerance-form-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: .5rem;
+    }
 
     .vertical-line {
-        height: 43%;
+        height: 1.5rem;
         width: 1px;
         background-color: #36629e;
         margin: 0 .5rem;
     }
 
-
+    .error-msg {
+        margin-top: .3rem;
+    }
 }

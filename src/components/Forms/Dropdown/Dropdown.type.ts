@@ -1,8 +1,8 @@
-import IFormControl from "../../../core/interfaces/IFormControl";
+import FormControl from "../../../core/FormControl";
 
 type DropdownProps = {
     options: Array<DropdownOption>;
-    formControl: IFormControl<string>;
+    formControl: FormControl<string>;
     bottomBorder?: boolean;
 };
 

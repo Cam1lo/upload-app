@@ -1,8 +1,7 @@
-import IFormControl from "../../../core/interfaces/IFormControl";
+import FormControl from "../../../core/FormControl";
 
 type ToggleProps = {
-    title: string;
-    formControl: IFormControl<boolean>;
+    formControl: FormControl<boolean>;
     label: string;
 };
 

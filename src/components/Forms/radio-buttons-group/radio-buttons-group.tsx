@@ -4,12 +4,15 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import "./radio-buttons-group.scss";
 import { RadioButtonsGroupProps } from "./radio-buttons-group.type";
+import { useState } from "react";
 
 export default function RadioButtonsGroup({ options, formControl, title }: RadioButtonsGroupProps) {
+    const [value, setValue] = useState(formControl.value);
+
     return (
         <FormControl className="radio">
             <span className="title">{title}</span>
-            <RadioGroup defaultValue={formControl.value} row className="options-group">
+            <RadioGroup value={value} row className="options-group">
                 {options.map((option) => (
                     <FormControlLabel
                         key={option.value}
@@ -24,7 +27,10 @@ export default function RadioButtonsGroup({ options, formControl, title }: Radio
                             />
                         }
                         label={option.label}
-                        onChange={formControl.onChange}
+                        onChange={(e: any) => {
+                            formControl.onChange(e.target.value);
+                            setValue(e.target.value);
+                        }}
                     />
                 ))}
             </RadioGroup>

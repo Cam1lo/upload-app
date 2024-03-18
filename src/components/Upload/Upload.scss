@@ -48,3 +48,13 @@
         }
     }
 }
+
+@media (max-width: 640px) {
+    .upload-container {
+        .upload {
+            .drag-drop {
+                display: none;
+            }
+        }
+    }
+}

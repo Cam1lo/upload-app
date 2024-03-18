@@ -8,6 +8,7 @@
         display: flex;
         flex: 2;
         max-width: 12rem;
+        gap: 1rem;
 
         // overwriting font weight on dropdown component
         .dropdown>select {
@@ -19,4 +20,17 @@
 
     }
 
+}
+
+@media (max-width: 640px) {
+    .client-assignation {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+
+        .left {
+            flex: 1;
+            max-width: 100%;
+        }
+    }
 }

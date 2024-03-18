@@ -1,8 +1,8 @@
-import IFormControl from "../../../../core/interfaces/IFormControl";
+import FormControl from "../../../../core/FormControl";
 
 type ToleranceWindowProps = {
-    toggleformControl: IFormControl<boolean>;
-    timeFormControl: IFormControl<Date | null>;
+    toggleformControl: FormControl<boolean>;
+    timeFormControl: FormControl<Date | null>;
 };
 
 export type { ToleranceWindowProps };

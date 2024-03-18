@@ -53,3 +53,16 @@
         }
     }
 }
+
+@media (max-width: 640px) {
+    .wrapper {
+        .modal {
+            padding: 1rem;
+            margin: 0;
+
+            .content {
+                margin-top: 2rem;
+            }
+        }
+    }
+}

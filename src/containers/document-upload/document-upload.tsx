@@ -7,7 +7,7 @@ import {
     MULTIPLE_TESTING_CENTERS,
     SINGLE_TESTING_CENTER,
 } from "../../core/constants/document-upload";
-import { DocumentUploadFormState } from "../../core/interfaces/IDocumentUploadFormState";
+import { ClientType, DocumentUploadFormState } from "../../core/interfaces/IDocumentUploadFormState";
 import { CheckColors } from "../../components/check/check.type";
 import { ButtonType, ButtonSize } from "../../components/button/button.type";
 import IClientAssignation from "../../core/interfaces/IClientAssignation";
@@ -19,37 +19,102 @@ import ToleranceWindow from "./subcomponents/tolerance-window/tolerance-window";
 import UploadButton from "./subcomponents/upload-button/upload-button";
 import Modal from "../../components/modal/modal";
 import File from "../file/file";
+import FormControl from "../../core/FormControl";
+import { isFormValid, touchAllControls } from "../../utils/utils";
 
 function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentUploadFormState) => void }) {
+    // Modal open state
     const [isOpen, setIsOpen] = useState(true);
-
+    // Modal form state
     const [formState, setFormState] = useState<DocumentUploadFormState>(DEFAULT_FORM_STATE);
 
-    const onImportNameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = event.target.options[event.target.selectedIndex].value;
-        setFormState((prev: DocumentUploadFormState) => ({ ...prev, importName: selectedValue }));
+    const getFormState = (): DocumentUploadFormState => {
+        return {
+            touched: true,
+            file: controls.fileFormControl.value,
+            importName: controls.dropDownformControl.value,
+            elapsedDates: formState.elapsedDates,
+            locationChecked: formState.locationChecked,
+            splitSchedule: controls.splitScheduleFormControl.value === "true",
+            clientType: controls.clientTypeFormControl.value,
+            clientList: controls.clientListFormControl.value,
+            toleranceWindow: controls.toggleFormControl.value,
+            toleranceWindowTime: controls.timeFormControl.value,
+        };
+    };
+
+    // Initialize form controls
+    const initControls = () => {
+        return {
+            dropDownformControl: new FormControl("", [Validators.required], (value: string) => {
+                setFormState({ ...getFormState(), importName: value });
+            }),
+            fileFormControl: new FormControl<File | null>(null, [Validators.required], (value: File) => {
+                setFormState({ ...getFormState(), file: value });
+            }),
+            toggleFormControl: new FormControl<boolean>(formState.toleranceWindow, [], (value: boolean) => {
+                setFormState({ ...getFormState(), toleranceWindow: value });
+            }),
+            timeFormControl: new FormControl<Date | null>(formState.toleranceWindowTime, [], (value: Date) => {
+                setFormState({ ...getFormState(), toleranceWindowTime: value });
+            }),
+            splitScheduleFormControl: new FormControl<string>(String(formState.splitSchedule)),
+            clientTypeFormControl: new FormControl<ClientType>(formState.clientType, [], (value: ClientType) => {
+                setFormState({
+                    ...getFormState(),
+                    clientType: value,
+                });
+            }),
+            clientListFormControl: new FormControl<Array<IClientAssignation>>(
+                formState.clientList,
+                [Validators.allCentersAssignedWithTime],
+                (value: Array<IClientAssignation>) => {
+                    setFormState({
+                        ...getFormState(),
+                        clientList: getFormState().clientType === ClientType.SINGLE ? [value[0]] : value,
+                    });
+                }
+            ),
+        };
+    };
+
+    const [controls, setControls] = useState(initControls);
+
+    const submit = () => {
+        // Get the current form state from the controls and set it to the form state
+        const formState = getFormState();
+        // Set the controls as touched to show the errors
+        setControls(touchAllControls(controls));
+        // Set the form state
+        setFormState(formState);
+
+        // If the form is valid, submit the form and close the modal and reset the form
+        if (isFormValid(controls)) {
+            onSubmit(formState);
+            setIsOpen(false);
+        }
     };
 
     return (
         <>
             <UploadButton
                 uploadDocumentOnClick={() => {
+                    setFormState(DEFAULT_FORM_STATE);
+                    setControls(initControls);
                     setIsOpen(true);
                 }}></UploadButton>
             <Modal
                 title="Document Upload"
                 isOpen={isOpen}
                 onClose={() => {
+                    setFormState(DEFAULT_FORM_STATE);
+                    setControls(initControls());
                     setIsOpen(false);
                 }}>
                 <div className="modal-body">
                     <div className="row1">
                         <Dropdown
-                            formControl={{
-                                value: formState.importName || "",
-                                onChange: onImportNameChange,
-                                validators: [Validators.required],
-                            }}
+                            formControl={controls.dropDownformControl}
                             options={[
                                 { value: "", label: "Select Import Name:" },
                                 { value: "1", label: "Import 1" },
@@ -57,12 +122,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                 { value: "3", label: "Import 3" },
                             ]}></Dropdown>
 
-                        <File
-                            onFileChange={(file: File) => {
-                                console.log(file);
-                                setFormState((prev: DocumentUploadFormState) => ({ ...prev, file: file }));
-                            }}
-                        />
+                        <File formControl={controls.fileFormControl} />
 
                         <Check
                             title="Elapse Data Checking:"
@@ -72,43 +132,18 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             }}
                         />
 
-                        <ToleranceWindow
-                            toggleformControl={{
-                                value: formState.toleranceWindow || false,
-                                onChange: (value: boolean) => {
-                                    setFormState((prev: DocumentUploadFormState) => ({
-                                        ...prev,
-                                        toleranceWindow: value === true,
-                                    }));
-                                },
-                                validators: [Validators.required],
-                            }}
-                            timeFormControl={{
-                                value: formState.toleranceWindowTime || null,
-                                onChange: (value: Date) => {
-                                    setFormState((prev: DocumentUploadFormState) => ({
-                                        ...prev,
-                                        toleranceWindowTime: value,
-                                    }));
-                                },
-                                validators: [Validators.required],
-                            }}
-                        />
+                        <div>
+                            <ToleranceWindow
+                                toggleformControl={controls.toggleFormControl}
+                                timeFormControl={controls.timeFormControl}
+                            />
+                        </div>
                     </div>
                     <div className="row2">
                         <div className="border-bottom">
                             <RadioButtonsGroup
-                                title="Split schedule using social distancing ?"
-                                formControl={{
-                                    value: String(formState.splitSchedule),
-                                    onChange: (event: any) => {
-                                        setFormState((prev: DocumentUploadFormState) => ({
-                                            ...prev,
-                                            splitSchedule: event.target.value === "true",
-                                        }));
-                                    },
-                                    validators: [Validators.required],
-                                }}
+                                title="Split schedule using social distancing?"
+                                formControl={controls.splitScheduleFormControl}
                                 options={[
                                     { value: "true", label: "Yes" },
                                     { value: "false", label: "No" },
@@ -122,54 +157,22 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             }}></Check>
                         <RadioButtonsGroup
                             title="Client:"
-                            formControl={{
-                                value: formState.clientType || "Single",
-                                onChange: (event: any) => {
-                                    setFormState((prev: DocumentUploadFormState) => ({
-                                        ...prev,
-                                        clientType: event.target.value,
-                                        clientList:
-                                            event.target.value === "Single"
-                                                ? SINGLE_TESTING_CENTER
-                                                : MULTIPLE_TESTING_CENTERS,
-                                    }));
-                                },
-                                validators: [Validators.required],
-                            }}
+                            formControl={controls.clientTypeFormControl}
                             options={[
                                 { value: "Single", label: "Single" },
                                 { value: "Multiple", label: "Multiple" },
                             ]}></RadioButtonsGroup>
-                        {formState.clientList && formState.clientList.length > 0
-                            ? formState.clientList.map((client: IClientAssignation, index: number) => (
-                                  <ClientAssignation
-                                      dropDownformControl={{
-                                          value: client.name || "",
-                                          onChange: (event: any) => {
-                                              setFormState((prev: DocumentUploadFormState) => {
-                                                  const newClientList = [...(prev.clientList || [])];
-                                                  newClientList[index].time = event.target.value;
-                                                  return { ...prev, clientList: newClientList };
-                                              });
-                                          },
-                                          validators: [Validators.required],
-                                      }}
-                                      clientAssignation={client}
-                                      timeFormControl={{
-                                          value: client.time || null,
-                                          onChange: (value: Date) => {
-                                              setFormState((prev: DocumentUploadFormState) => {
-                                                  const newClientList = [...(prev.clientList || [])];
-                                                  newClientList[index].time = value;
-                                                  return { ...prev, clientList: newClientList };
-                                              });
-                                          },
-                                          validators: [Validators.required],
-                                      }}
-                                      key={index}
-                                  />
-                              ))
-                            : null}
+                        {formState.clientType === ClientType.SINGLE ? (
+                            <ClientAssignation
+                                clientAssignation={SINGLE_TESTING_CENTER}
+                                formControl={controls.clientListFormControl}
+                            />
+                        ) : (
+                            <ClientAssignation
+                                clientAssignation={MULTIPLE_TESTING_CENTERS}
+                                formControl={controls.clientListFormControl}
+                            />
+                        )}
                     </div>
                 </div>
                 <div className="modal-footer">
@@ -177,7 +180,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                     <div className="buttons-container">
                         <Button
                             onclick={() => {
-                                onSubmit(formState);
+                                submit();
                             }}
                             type={ButtonType.PRIMARY}
                             size={ButtonSize.XL}>
@@ -187,6 +190,8 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             type={ButtonType.SECONDARY}
                             size={ButtonSize.XL}
                             onclick={() => {
+                                setFormState(DEFAULT_FORM_STATE);
+                                setControls(initControls());
                                 setIsOpen(false);
                             }}>
                             Cancel
@@ -197,5 +202,4 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
         </>
     );
 }
-
 export default DocumentUpload;

@@ -1,8 +1,8 @@
-import IFormControl from "../../../core/interfaces/IFormControl";
+import FormControl from "../../../core/FormControl";
 
 type RadioButtonsGroupProps = {
     options: { value: string; label: string }[];
-    formControl: IFormControl<string>;
+    formControl: FormControl<string>;
     title: string;
 };
 
