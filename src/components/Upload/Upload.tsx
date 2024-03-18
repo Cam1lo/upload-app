@@ -1,5 +1,6 @@
 import Button from "../Button/Button";
 import "./Upload.scss";
+import FileIcon from "../../assets/icons/file.png";
 
 function Upload() {
     const triggerInputFile = () => {
@@ -15,7 +16,7 @@ function Upload() {
 
             <div className="upload">
                 <div className="drag-drop">
-                    <img src="/assets/icons/file.png" alt="" />
+                    <img src={FileIcon} alt="" />
                     <span>
                         Drag & Drop Here Or{" "}
                         <strong className="text-primary" onClick={triggerInputFile}>

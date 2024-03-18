@@ -1,11 +1,12 @@
 import "./Progress.scss";
+import FileIcon from "../../assets/icons/file-image.png";
 
 function Progress() {
     return (
         <div className="border-bottom">
             <div className="progress">
                 <div className="col1">
-                    <img src="/assets/icons/file-image.png" alt="" />
+                    <img src={FileIcon} alt="" />
                 </div>
                 <div className="col2">
                     <div className="top">

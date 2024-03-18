@@ -1,5 +1,6 @@
 import Button from "../Button/Button";
 import "./Modal.scss";
+import CloseIcon from "../../assets/icons/close.png";
 
 type Props = {
     title: string;
@@ -13,7 +14,7 @@ function Modal({ title, children, onClose, isOpen }: Props) {
         <div className="wrapper">
             <div className="modal">
                 <Button type="tertiary" size="xs" backgroundColor="#041d58" onclick={onClose}>
-                    <img src="/assets/icons/close.png" alt="" height={18} width={19} />
+                    <img src={CloseIcon} alt="" height={18} width={19} />
                 </Button>
                 <div className="content">
                     <h1 className="border-bottom">{title}</h1>

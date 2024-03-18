@@ -4,6 +4,7 @@ import "./Time.scss";
 import { useState } from "react";
 import { getTimeGivenDate } from "../../../utils/utils";
 import IFormControl from "../../../core/interfaces/IFormControl";
+import TimeIcon from "../../../assets/icons/time.png";
 
 type Props = {
     label: string;
@@ -19,7 +20,7 @@ function Time({ label, formControl }: Props) {
 
     return (
         <div className="time">
-            <img className="icon" onClick={triggerTimePicker} src="/assets/icons/time.png" alt="" />
+            <img className="icon" onClick={triggerTimePicker} src={TimeIcon} alt="" />
             <span className="label">{_label}</span>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className="hidden">
