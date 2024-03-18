@@ -57,7 +57,12 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                 { value: "3", label: "Import 3" },
                             ]}></Dropdown>
 
-                        <File />
+                        <File
+                            onFileChange={(file: File) => {
+                                console.log(file);
+                                setFormState((prev: DocumentUploadFormState) => ({ ...prev, file: file }));
+                            }}
+                        />
 
                         <Check
                             title="Elapse Data Checking:"

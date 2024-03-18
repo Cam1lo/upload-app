@@ -53,15 +53,14 @@ function Toggle({ title, formControl, label }: ToggleProps) {
     }));
 
     return (
-        <div className="toggle">
+        <div
+            className="toggle"
+            onClick={(e) => {
+                formControl.onChange(!formControl.value);
+            }}>
             <span className="title">{title}</span>
             <div>
-                <IOSSwitch
-                    checked={formControl.value}
-                    onChange={(e) => {
-                        formControl.onChange(!formControl.value);
-                    }}
-                />
+                <IOSSwitch checked={formControl.value} />
                 <span>{label}</span>
             </div>
         </div>

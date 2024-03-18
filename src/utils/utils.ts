@@ -6,3 +6,7 @@ export function getTimeGivenDate(date: Date): string {
     });
     return formatedTime;
 }
+
+export function firstToUpper(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

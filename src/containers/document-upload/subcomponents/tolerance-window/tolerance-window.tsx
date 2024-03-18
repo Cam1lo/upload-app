@@ -7,8 +7,12 @@ function ToleranceWindow({ toggleformControl, timeFormControl }: ToleranceWindow
     return (
         <div className="tolerance-window">
             <Toggle title="Tolerance Window:" formControl={toggleformControl} label="Toggle ON" />
-            <div className="vertical-line"></div>
-            <Time formControl={timeFormControl} label="Select Tolerance Level" />
+            {toggleformControl.value ? (
+                <>
+                    <div className="vertical-line"></div>
+                    <Time formControl={timeFormControl} label="Select Tolerance Level" />
+                </>
+            ) : null}
         </div>
     );
 }
