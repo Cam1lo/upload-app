@@ -1,14 +1,9 @@
 import Time from "../../../../components/Forms/Time/Time";
 import Toggle from "../../../../components/Forms/Toggle/Toggle";
-import IFormControl from "../../../../core/interfaces/IFormControl";
 import "./ToleranceWindow.scss";
+import { ToleranceWindowProps } from "./ToleranceWindow.type";
 
-type Props = {
-    toggleformControl: IFormControl<boolean>;
-    timeFormControl: IFormControl<Date | null>;
-};
-
-function ToleranceWindow({ toggleformControl, timeFormControl }: Props) {
+function ToleranceWindow({ toggleformControl, timeFormControl }: ToleranceWindowProps) {
     return (
         <div className="tolerance-window">
             <Toggle title="Tolerance Window:" formControl={toggleformControl} label="Toggle ON" />

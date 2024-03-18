@@ -1,11 +1,7 @@
 import "./Check.scss";
+import { CheckProps } from "./Check.type";
 
-type Props = {
-    title: string;
-    status: { label: string; color: "success" | "warning" | "error" | "info" | "default" | "disabled" };
-};
-
-function Check({ title, status }: Props) {
+function Check({ title, status }: CheckProps) {
     return (
         <div className="check border-bottom">
             <span className="title">{title}</span>

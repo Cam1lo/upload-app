@@ -1,13 +1,7 @@
-import IFormControl from "../../../core/interfaces/IFormControl";
 import "./Dropdown.scss";
+import { DropdownProps } from "./Dropdown.type";
 
-type Props = {
-    options: { value: string; label: string }[];
-    formControl: IFormControl<string>;
-    bottomBorder?: boolean;
-};
-
-function Dropdown({ options, formControl, bottomBorder = true }: Props) {
+function Dropdown({ options, formControl, bottomBorder = true }: DropdownProps) {
     return (
         <div className={`dropdown ${bottomBorder ? "border-bottom" : ""}`}>
             <select onChange={formControl.onChange}>

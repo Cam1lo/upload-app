@@ -14,8 +14,11 @@ import {
     DEFAULT_FORM_STATE,
     MULTIPLE_TESTING_CENTERS,
     SINGLE_TESTING_CENTER,
-} from "../../core/constants/document-upload.const";
-import DocumentUploadFormState from "../../core/interfaces/IDocumentUploadFormState";
+} from "../../core/constants/document-upload";
+import { DocumentUploadFormState } from "../../core/interfaces/IDocumentUploadFormState";
+import { CheckColors } from "../../components/Check/Check.type";
+import { ButtonType, ButtonSize } from "../../components/Button/Button.type";
+import IClientAssignation from "../../core/interfaces/IClientAssignation";
 
 function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentUploadFormState) => void }) {
     const [isOpen, setIsOpen] = useState(true);
@@ -24,7 +27,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
 
     const onImportNameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.options[event.target.selectedIndex].value;
-        setFormState((prev) => ({ ...prev, importName: selectedValue }));
+        setFormState((prev: DocumentUploadFormState) => ({ ...prev, importName: selectedValue }));
     };
 
     return (
@@ -60,7 +63,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             title="Elapse Data Checking:"
                             status={{
                                 label: formState.elapsedDates ? "Elapsed Dates Found!" : "No Elapsed Dates!",
-                                color: formState.elapsedDates ? "error" : "success",
+                                color: formState.elapsedDates ? CheckColors.ERROR : CheckColors.SUCCESS,
                             }}
                         />
 
@@ -68,7 +71,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             toggleformControl={{
                                 value: formState.toleranceWindow || false,
                                 onChange: (value) => {
-                                    setFormState((prev) => ({
+                                    setFormState((prev: DocumentUploadFormState) => ({
                                         ...prev,
                                         toleranceWindow: value === true,
                                     }));
@@ -78,7 +81,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             timeFormControl={{
                                 value: formState.toleranceWindowTime || null,
                                 onChange: (value) => {
-                                    setFormState((prev) => ({
+                                    setFormState((prev: DocumentUploadFormState) => ({
                                         ...prev,
                                         toleranceWindowTime: value,
                                     }));
@@ -94,7 +97,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                 formControl={{
                                     value: String(formState.splitSchedule),
                                     onChange: (event: any) => {
-                                        setFormState((prev) => ({
+                                        setFormState((prev: DocumentUploadFormState) => ({
                                             ...prev,
                                             splitSchedule: event.target.value === "true",
                                         }));
@@ -110,14 +113,14 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             title="Location Checking:"
                             status={{
                                 label: formState.locationChecked ? "All Available!" : "Not Checked",
-                                color: formState.locationChecked ? "success" : "error",
+                                color: formState.locationChecked ? CheckColors.SUCCESS : CheckColors.ERROR,
                             }}></Check>
                         <RadioButtonsGroup
                             title="Client:"
                             formControl={{
                                 value: formState.clientType || "Single",
                                 onChange: (event: any) => {
-                                    setFormState((prev) => ({
+                                    setFormState((prev: DocumentUploadFormState) => ({
                                         ...prev,
                                         clientType: event.target.value,
                                         clientList:
@@ -133,12 +136,12 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                 { value: "Multiple", label: "Multiple" },
                             ]}></RadioButtonsGroup>
                         {formState.clientList && formState.clientList.length > 0
-                            ? formState.clientList.map((client, index) => (
+                            ? formState.clientList.map((client: IClientAssignation, index: number) => (
                                   <ClientAssignation
                                       dropDownformControl={{
                                           value: client.name || "",
                                           onChange: (event: any) => {
-                                              setFormState((prev) => {
+                                              setFormState((prev: DocumentUploadFormState) => {
                                                   const newClientList = [...(prev.clientList || [])];
                                                   newClientList[index].time = event.target.value;
                                                   return { ...prev, clientList: newClientList };
@@ -150,7 +153,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                       timeFormControl={{
                                           value: client.time || null,
                                           onChange: (value) => {
-                                              setFormState((prev) => {
+                                              setFormState((prev: DocumentUploadFormState) => {
                                                   const newClientList = [...(prev.clientList || [])];
                                                   newClientList[index].time = value;
                                                   return { ...prev, clientList: newClientList };
@@ -171,13 +174,13 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                             onclick={() => {
                                 onSubmit(formState);
                             }}
-                            type="primary"
-                            size="xl">
+                            type={ButtonType.PRIMARY}
+                            size={ButtonSize.XL}>
                             Continue Import
                         </Button>
                         <Button
-                            type="secondary"
-                            size="xl"
+                            type={ButtonType.SECONDARY}
+                            size={ButtonSize.XL}
                             onclick={() => {
                                 setIsOpen(false);
                             }}>

@@ -1,6 +1,6 @@
 import IClientAssignation from "./IClientAssignation";
 
-export default interface DocumentUploadFormState {
+interface DocumentUploadFormState {
     importName: string;
     file?: File;
     elapsedDates: boolean;
@@ -8,6 +8,14 @@ export default interface DocumentUploadFormState {
     toleranceWindowTime: Date | null;
     splitSchedule: boolean;
     locationChecked: boolean;
-    clientType: "Single" | "Multiple";
+    clientType: ClientType;
     clientList: IClientAssignation[];
 };
+
+enum ClientType {
+    SINGLE = "Single",
+    MULTIPLE = "Multiple"
+}
+
+export { ClientType }
+export type { DocumentUploadFormState }

@@ -1,16 +1,9 @@
-import IClientAssignation from "../../../../core/interfaces/IClientAssignation";
 import Dropdown from "../../../../components/Forms/Dropdown/Dropdown";
 import Time from "../../../../components/Forms/Time/Time";
 import "./ClientAssignation.scss";
-import IFormControl from "../../../../core/interfaces/IFormControl";
+import { ClientAssignationProps } from "./ClientAssignation.type";
 
-type Props = {
-    clientAssignation: IClientAssignation;
-    dropDownformControl: IFormControl<string>;
-    timeFormControl: IFormControl<Date | null>;
-};
-
-function ClientAssignation({ clientAssignation, dropDownformControl, timeFormControl }: Props) {
+function ClientAssignation({ clientAssignation, dropDownformControl, timeFormControl }: ClientAssignationProps) {
     return (
         <div className="client-assignation">
             <div className="label">{clientAssignation.name}</div>

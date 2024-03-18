@@ -6,3 +6,5 @@ TODO:
 -   Finish drag&drop
 -   Clean code
 -   Comment code
+-   Returntype to function
+-   Change arrays

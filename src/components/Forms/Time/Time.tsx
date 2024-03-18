@@ -3,15 +3,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "./Time.scss";
 import { useState } from "react";
 import { getTimeGivenDate } from "../../../utils/utils";
-import IFormControl from "../../../core/interfaces/IFormControl";
 import TimeIcon from "../../../assets/icons/time.png";
+import { TimeProps } from "./Time.type";
 
-type Props = {
-    label: string;
-    formControl: IFormControl<Date | null>;
-};
-
-function Time({ label, formControl }: Props) {
+function Time({ label, formControl }: TimeProps) {
     const [isOpened, setIsOpened] = useState(false);
     const [_label, setLabel] = useState(label);
     const triggerTimePicker = () => {

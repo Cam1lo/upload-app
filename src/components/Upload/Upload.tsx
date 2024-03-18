@@ -1,6 +1,7 @@
 import Button from "../Button/Button";
 import "./Upload.scss";
 import FileIcon from "../../assets/icons/file.png";
+import { ButtonSize, ButtonType } from "../Button/Button.type";
 
 function Upload() {
     const triggerInputFile = () => {
@@ -24,7 +25,7 @@ function Upload() {
                         </strong>
                     </span>
                 </div>
-                <Button type="primary" size="xl" onclick={triggerInputFile}>
+                <Button type={ButtonType.PRIMARY} size={ButtonSize.XL} onclick={triggerInputFile}>
                     Upload Manifest
                 </Button>
                 <input

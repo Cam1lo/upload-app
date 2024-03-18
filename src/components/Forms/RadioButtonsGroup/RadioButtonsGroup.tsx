@@ -2,16 +2,10 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import IFormControl from "../../../core/interfaces/IFormControl";
 import "./RadioButtonsGroup.scss";
+import { RadioButtonsGroupProps } from "./RadioButtonsGroup.type";
 
-type Props = {
-    options: { value: string; label: string }[];
-    formControl: IFormControl<string>;
-    title: string;
-};
-
-export default function RadioButtonsGroup({ options, formControl, title }: Props) {
+export default function RadioButtonsGroup({ options, formControl, title }: RadioButtonsGroupProps) {
     return (
         <FormControl className="radio">
             <span className="title">{title}</span>

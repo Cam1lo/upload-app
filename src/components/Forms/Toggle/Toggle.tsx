@@ -1,15 +1,9 @@
 import { styled } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
-import IFormControl from "../../../core/interfaces/IFormControl";
 import "./Toggle.scss";
+import { ToggleProps } from "./Toggle.type";
 
-type Props = {
-    title: string;
-    formControl: IFormControl<boolean>;
-    label: string;
-};
-
-function Toggle({ title, formControl, label }: Props) {
+function Toggle({ title, formControl, label }: ToggleProps) {
     const IOSSwitch = styled((props: SwitchProps) => (
         <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
     ))(({ theme }) => ({
