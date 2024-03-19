@@ -4,9 +4,6 @@ import { DocumentUploadFormState } from "./core/interfaces/IDocumentUploadFormSt
 
 function App() {
     const onSubmit = (docUploadFormState: DocumentUploadFormState) => {
-        toast.success(JSON.stringify(docUploadFormState), {
-            duration: 10000,
-        });
         toast.success("Document uploaded successfully");
     };
 

@@ -33,16 +33,37 @@ export const SINGLE_TESTING_CENTER: Array<IClientAssignation> = [
     { name: "Testing Center 1", clients: CLIENT_ASSIGNATIONS, time: null, selectedClient: null },
 ];
 
-export const DEFAULT_FORM_STATE: DocumentUploadFormState = {
-    importName: "",
-    elapsedDates: false,
-    file: null,
-    toleranceWindow: true,
-    toleranceWindowTime: null,
-    splitSchedule: true,
-    locationChecked: true,
-    clientType: ClientType.MULTIPLE,
-    clientList: MULTIPLE_TESTING_CENTERS,
-    touched: false,
-}
+// export const DEFAULT_FORM_STATE: DocumentUploadFormState = {
+//     importName: "",
+//     elapsedDates: false,
+//     file: null,
+//     toleranceWindow: true,
+//     toleranceWindowTime: null,
+//     splitSchedule: true,
+//     locationChecked: true,
+//     clientType: ClientType.MULTIPLE,
+//     clientList: MULTIPLE_TESTING_CENTERS,
+//     touched: false,
+// }
 
+// export const DEFAULT_FORM_STATE: DocumentUploadFormState = {
+//     controls: {
+//         importName: {
+//             value: "",
+//             touched: false,
+//             valid: false,
+//             validation: {
+//                 required: true,
+//             },
+//         },
+//         file: {
+//             value: null,
+//             touched: false,
+//             valid: false,
+//             validation: {
+//                 required: true,
+//             },
+//         },
+//     },
+//     touched: false,
+// }

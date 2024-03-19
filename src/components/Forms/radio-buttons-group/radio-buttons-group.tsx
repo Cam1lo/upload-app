@@ -5,15 +5,16 @@ import FormControl from "@mui/material/FormControl";
 import "./radio-buttons-group.scss";
 import { RadioButtonsGroupProps } from "./radio-buttons-group.type";
 import { useState } from "react";
+import { useFormikContext } from "formik";
 
-export default function RadioButtonsGroup({ options, formControl, title }: RadioButtonsGroupProps) {
-    const [value, setValue] = useState(formControl.value);
+export default function RadioButtonsGroup({ options, id, title }: any) {
+    const { values, setFieldValue } = useFormikContext<any>();
 
     return (
         <FormControl className="radio">
             <span className="title">{title}</span>
-            <RadioGroup value={value} row className="options-group">
-                {options.map((option) => (
+            <RadioGroup value={values[id]} row className="options-group">
+                {options.map((option: any) => (
                     <FormControlLabel
                         key={option.value}
                         value={option.value}
@@ -28,8 +29,7 @@ export default function RadioButtonsGroup({ options, formControl, title }: Radio
                         }
                         label={option.label}
                         onChange={(e: any) => {
-                            formControl.onChange(e.target.value);
-                            setValue(e.target.value);
+                            setFieldValue(id, e.target.value);
                         }}
                     />
                 ))}

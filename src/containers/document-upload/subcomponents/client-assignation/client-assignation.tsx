@@ -1,13 +1,43 @@
 import Time from "../../../../components/forms/time/time";
 import Dropdown from "../../../../components/forms/dropdown/dropdown";
 import "./client-assignation.scss";
-import { ClientAssignationProps } from "./client-assignation.type";
 import IClientAssignation from "../../../../core/interfaces/IClientAssignation";
-import FormControl from "../../../../core/FormControl";
+import { useFormikContext } from "formik";
 
-function ClientAssignation({ clientAssignation, formControl }: ClientAssignationProps) {
+function ClientAssignation({ clientAssignation, id, errors, touched }: any) {
+    const { values, setFieldValue } = useFormikContext<any>();
+    const dropdownChange = (newClient: any) => {
+        setFieldValue(
+            "clientAssignation",
+            values.clientAssignation.map((client: any) =>
+                client.name === newClient.name
+                    ? {
+                          ...client,
+                          selectedClient: newClient.selectedClient,
+                      }
+                    : client
+            )
+        );
+    };
+
+    const timeChange = (newClient: any) => {
+        setFieldValue(
+            "clientAssignation",
+            values.clientAssignation.map((client: any) =>
+                client.name === newClient.name
+                    ? {
+                          ...client,
+                          time: newClient.time,
+                      }
+                    : client
+            )
+        );
+
+        console.log(newClient);
+    };
+
     return (
-        <>
+        <div className="clients">
             {clientAssignation.map((client: IClientAssignation, index: number) => {
                 return (
                     <div className="client-assignation" key={index}>
@@ -16,27 +46,28 @@ function ClientAssignation({ clientAssignation, formControl }: ClientAssignation
                             <Dropdown
                                 bottomBorder={false}
                                 options={client.clients}
-                                formControl={
-                                    new FormControl(client.clients[0].value, [], (e) => {
-                                        client.selectedClient = e;
-                                        formControl.onChange(clientAssignation);
-                                    })
-                                }></Dropdown>
+                                onChange={(e: any) => {
+                                    dropdownChange({
+                                        ...client,
+                                        selectedClient: String(e),
+                                    });
+                                }}></Dropdown>
                             <Time
-                                formControl={
-                                    new FormControl(client.time, [], (e) => {
-                                        client.time = e;
-                                        formControl.onChange(clientAssignation);
-                                    })
-                                }
+                                id={clientAssignation[index].time}
+                                onChange={(e: Date) => {
+                                    timeChange({
+                                        ...client,
+                                        time: e,
+                                    });
+                                }}
                                 label={""}
                             />
                         </div>
                     </div>
                 );
             })}
-            {!formControl.isValid && formControl.touched ? <p className="error-msg">{formControl.errorMsg}</p> : null}
-        </>
+            {touched && errors && <p className="error-msg">{errors}</p>}
+        </div>
     );
 }
 export default ClientAssignation;

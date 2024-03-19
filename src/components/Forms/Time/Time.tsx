@@ -5,8 +5,10 @@ import { useState } from "react";
 import { getTimeGivenDate } from "../../../utils/utils";
 import TimeIcon from "../../../assets/icons/time.png";
 import { TimeProps } from "./time.type";
+import { useFormikContext } from "formik";
 
-function Time({ label, formControl }: TimeProps) {
+function Time({ label, id, onChange = null }: any) {
+    const { values, setFieldValue } = useFormikContext<any>();
     const [isOpened, setIsOpened] = useState(false);
     const [_label, setLabel] = useState(label);
     const triggerTimePicker = () => {
@@ -19,20 +21,37 @@ function Time({ label, formControl }: TimeProps) {
             <span className="label">{_label}</span>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className="hidden">
-                    <TimePicker
-                        onChange={(e: any) => {
-                            if (e.$d) {
+                    {!onChange ? (
+                        <TimePicker
+                            onChange={(e: any) => {
+                                if (e.$d) {
+                                    setLabel(getTimeGivenDate(e.$d));
+                                    setFieldValue(id, e.$d);
+                                }
+
+                                console.log(values);
+                            }}
+                            onAccept={() => {
+                                setIsOpened(false);
+                            }}
+                            onClose={() => {
+                                setIsOpened(false);
+                            }}
+                            open={isOpened}></TimePicker>
+                    ) : (
+                        <TimePicker
+                            onChange={(e: any) => {
+                                onChange(e.$d);
                                 setLabel(getTimeGivenDate(e.$d));
-                                formControl.onChange(e.$d);
-                            }
-                        }}
-                        onAccept={() => {
-                            setIsOpened(false);
-                        }}
-                        onClose={() => {
-                            setIsOpened(false);
-                        }}
-                        open={isOpened}></TimePicker>
+                            }}
+                            onAccept={() => {
+                                setIsOpened(false);
+                            }}
+                            onClose={() => {
+                                setIsOpened(false);
+                            }}
+                            open={isOpened}></TimePicker>
+                    )}
                 </div>
             </LocalizationProvider>
         </div>

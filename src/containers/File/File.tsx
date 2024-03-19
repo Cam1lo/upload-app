@@ -1,20 +1,19 @@
 import { useState } from "react";
 import Progress from "../../components/progess/progress";
 import Upload from "../../components/upload/upload";
-import FormControl from "../../core/FormControl";
 
-function File({ formControl }: { formControl: FormControl<File | null> }) {
-    const [file, setFile] = useState<File | null>(formControl.value);
+function File({ errors, touched, id }: any) {
+    const [file, setFile] = useState<File | null>(null);
 
     return (
         <div>
             <Upload
+                id={id}
                 onFileChange={(file: File) => {
-                    formControl.onChange(file);
                     setFile(file);
                 }}
             />
-            {!formControl.isValid && formControl.touched ? <p className="error-msg">{formControl.errorMsg}</p> : null}
+            {errors && touched ? <p className="error-msg">{errors}</p> : null}
 
             <Progress file={file} />
         </div>

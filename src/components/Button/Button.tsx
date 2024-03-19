@@ -1,9 +1,16 @@
 import { ButtonProps, ButtonSize, ButtonType } from "./button.type";
 import "./button.scss";
 
-function Button({ children, onclick, size = ButtonSize.MD, backgroundColor, type = ButtonType.PRIMARY }: ButtonProps) {
+function Button({
+    children,
+    onclick,
+    size = ButtonSize.MD,
+    backgroundColor,
+    type = ButtonType.PRIMARY,
+    isSubmit = false,
+}: ButtonProps) {
     return (
-        <button onClick={onclick} className={`button ${type} ${size}`}>
+        <button type={isSubmit ? "submit" : "button"} onClick={onclick} className={`button ${type} ${size}`}>
             {children}
         </button>
     );

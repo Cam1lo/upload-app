@@ -1,3 +1,9 @@
+.clients {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .client-assignation {
     display: flex;
     // background-color: black;

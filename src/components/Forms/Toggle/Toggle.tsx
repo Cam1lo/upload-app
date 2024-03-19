@@ -1,12 +1,8 @@
 import { styled } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import "./toggle.scss";
-import { ToggleProps } from "./toggle.type";
-import { useState } from "react";
 
-function Toggle({ formControl, label }: ToggleProps) {
-    const [state, setState] = useState<boolean>(formControl.value);
-
+function Toggle({ value, label, onChange }: any) {
     const IOSSwitch = styled((props: SwitchProps) => (
         <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
     ))(({ theme }) => ({
@@ -59,11 +55,10 @@ function Toggle({ formControl, label }: ToggleProps) {
         <div
             className="toggle"
             onClick={(e) => {
-                setState(!state);
-                formControl.onChange(!formControl.value);
+                onChange(!value);
             }}>
             <div>
-                <IOSSwitch checked={state} />
+                <IOSSwitch checked={value} />
                 <span>{label}</span>
             </div>
         </div>

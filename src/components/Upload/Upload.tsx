@@ -2,8 +2,11 @@ import Button from "../button/button";
 import "./upload.scss";
 import FileIcon from "../../assets/icons/file.png";
 import { ButtonSize, ButtonType } from "../button/button.type";
+import { Field, useFormikContext } from "formik";
 
-function Upload({ onFileChange }: { onFileChange: (file: File) => void }) {
+function Upload({ onFileChange, id }: { onFileChange: (file: File) => void; id: string }) {
+    const formikProps = useFormikContext();
+
     const triggerInputFile = () => {
         const inputFile = document.getElementById("input-file");
         if (inputFile) {
@@ -40,12 +43,14 @@ function Upload({ onFileChange }: { onFileChange: (file: File) => void }) {
                 </Button>
                 <input
                     id="input-file"
+                    name={id}
                     style={{
                         display: "none",
                     }}
-                    onChange={(event) => {
+                    onChange={(event: any) => {
                         const file = event.target.files && event.target.files[0];
                         if (file) {
+                            formikProps.setFieldValue(id, file);
                             onFileChange(file);
                         }
                     }}

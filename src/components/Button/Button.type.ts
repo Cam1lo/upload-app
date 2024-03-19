@@ -3,6 +3,7 @@ type ButtonProps = {
     onclick?: () => void;
     size?: ButtonSize;
     backgroundColor?: string;
+    isSubmit?: boolean;
     type?: ButtonType;
 }
 
