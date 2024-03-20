@@ -1,18 +1,15 @@
-import FormControl from "../FormControl";
-// import IClientAssignation from "./IClientAssignation";
+import IClientAssignation from "./IClientAssignation";
 
 interface DocumentUploadFormState {
-    controls: {
-        importName: FormControl<string>;
-        file: FormControl<File | null>;
-        // elapsedDates: boolean;
-        // toleranceWindow: boolean;
-        // toleranceWindowTime: Date | null;
-        // splitSchedule: boolean;
-        // locationChecked: boolean;
-        // clientType: ClientType;
-        // clientList: IClientAssignation[];
-    }
+    importName: string;
+    file: File | null;
+    elapsedDates: boolean;
+    toleranceWindow: boolean;
+    toleranceWindowTime: Date | null;
+    splitSchedule: boolean;
+    locationChecked: boolean;
+    clientType: ClientType;
+    clientAssignation: IClientAssignation[];
 };
 
 enum ClientType {

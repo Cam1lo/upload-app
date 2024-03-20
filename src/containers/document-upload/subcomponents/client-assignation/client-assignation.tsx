@@ -3,8 +3,9 @@ import Dropdown from "../../../../components/forms/dropdown/dropdown";
 import "./client-assignation.scss";
 import IClientAssignation from "../../../../core/interfaces/IClientAssignation";
 import { useFormikContext } from "formik";
+import { ClientAssignationProps } from "./client-assignation.type";
 
-function ClientAssignation({ clientAssignation, id, errors, touched }: any) {
+function ClientAssignation({ clientAssignation, id, errors, touched }: ClientAssignationProps) {
     const { values, setFieldValue } = useFormikContext<any>();
     const dropdownChange = (newClient: any) => {
         setFieldValue(
@@ -53,7 +54,7 @@ function ClientAssignation({ clientAssignation, id, errors, touched }: any) {
                                     });
                                 }}></Dropdown>
                             <Time
-                                id={clientAssignation[index].time}
+                                id={id + index}
                                 onChange={(e: Date) => {
                                     timeChange({
                                         ...client,
@@ -66,7 +67,9 @@ function ClientAssignation({ clientAssignation, id, errors, touched }: any) {
                     </div>
                 );
             })}
-            {touched && errors && <p className="error-msg">{errors}</p>}
+            {touched && errors && (
+                <p className="error-msg">{typeof errors === "string" ? errors : errors.join(", ")}</p>
+            )}
         </div>
     );
 }

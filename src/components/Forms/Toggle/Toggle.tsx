@@ -1,8 +1,9 @@
 import { styled } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import "./toggle.scss";
+import { ToggleProps } from "./toggle.type";
 
-function Toggle({ value, label, onChange }: any) {
+function Toggle({ value, label, onChange }: ToggleProps) {
     const IOSSwitch = styled((props: SwitchProps) => (
         <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
     ))(({ theme }) => ({
@@ -54,7 +55,7 @@ function Toggle({ value, label, onChange }: any) {
     return (
         <div
             className="toggle"
-            onClick={(e) => {
+            onClick={() => {
                 onChange(!value);
             }}>
             <div>

@@ -1,8 +1,8 @@
-import FormControl from "../../../../core/FormControl";
-
 type ToleranceWindowProps = {
-    toggleformControl: FormControl<boolean>;
-    timeFormControl: FormControl<Date | null>;
+    errors?: string;
+    touched?: boolean;
+    toleranceWindowId: string;
+    toleranceWindowTimeId: string
 };
 
 export type { ToleranceWindowProps };

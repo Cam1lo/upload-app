@@ -2,9 +2,10 @@ import Button from "../button/button";
 import "./upload.scss";
 import FileIcon from "../../assets/icons/file.png";
 import { ButtonSize, ButtonType } from "../button/button.type";
-import { Field, useFormikContext } from "formik";
+import { useFormikContext } from "formik";
+import { UploadProps } from "./upload.type";
 
-function Upload({ onFileChange, id }: { onFileChange: (file: File) => void; id: string }) {
+function Upload({ onFileChange, id }: UploadProps) {
     const formikProps = useFormikContext();
 
     const triggerInputFile = () => {

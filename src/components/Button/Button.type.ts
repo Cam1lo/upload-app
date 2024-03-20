@@ -2,7 +2,6 @@ type ButtonProps = {
     children: React.ReactNode;
     onclick?: () => void;
     size?: ButtonSize;
-    backgroundColor?: string;
     isSubmit?: boolean;
     type?: ButtonType;
 }

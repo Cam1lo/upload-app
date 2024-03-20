@@ -1,9 +1,8 @@
 import toast, { Toaster } from "react-hot-toast";
 import DocumentUpload from "./containers/document-upload/document-upload";
-import { DocumentUploadFormState } from "./core/interfaces/IDocumentUploadFormState";
 
 function App() {
-    const onSubmit = (docUploadFormState: DocumentUploadFormState) => {
+    const onSubmit = () => {
         toast.success("Document uploaded successfully");
     };
 

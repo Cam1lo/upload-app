@@ -7,8 +7,8 @@ import TimeIcon from "../../../assets/icons/time.png";
 import { TimeProps } from "./time.type";
 import { useFormikContext } from "formik";
 
-function Time({ label, id, onChange = null }: any) {
-    const { values, setFieldValue } = useFormikContext<any>();
+function Time({ label, id, onChange }: TimeProps) {
+    const { setFieldValue } = useFormikContext<any>();
     const [isOpened, setIsOpened] = useState(false);
     const [_label, setLabel] = useState(label);
     const triggerTimePicker = () => {
@@ -24,12 +24,10 @@ function Time({ label, id, onChange = null }: any) {
                     {!onChange ? (
                         <TimePicker
                             onChange={(e: any) => {
-                                if (e.$d) {
+                                if (id && e.$d) {
                                     setLabel(getTimeGivenDate(e.$d));
                                     setFieldValue(id, e.$d);
                                 }
-
-                                console.log(values);
                             }}
                             onAccept={() => {
                                 setIsOpened(false);

@@ -1,7 +1,7 @@
-import FormControl from "../../../core/FormControl";
 
 type ToggleProps = {
-    formControl: FormControl<boolean>;
+    value: boolean;
+    onChange: (value: boolean) => void;
     label: string;
 };
 

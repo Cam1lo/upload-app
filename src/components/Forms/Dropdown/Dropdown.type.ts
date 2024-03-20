@@ -1,9 +1,10 @@
-import FormControl from "../../../core/FormControl";
-
 type DropdownProps = {
+    errors?: string;
+    touched?: boolean;
+    id?: string;
     options: Array<DropdownOption>;
-    formControl: FormControl<string>;
     bottomBorder?: boolean;
+    onChange?: (value: string) => void;
 };
 
 type DropdownOption = {

@@ -8,7 +8,7 @@ function Modal({ title, children, onClose, isOpen }: ModalProps) {
     return isOpen ? (
         <div className="wrapper">
             <div className="modal">
-                <Button type={ButtonType.TERTIARY} size={ButtonSize.XS} backgroundColor="#041d58" onclick={onClose}>
+                <Button type={ButtonType.TERTIARY} size={ButtonSize.XS} onclick={onClose}>
                     <img src={CloseIcon} alt="" height={18} width={19} />
                 </Button>
                 <div className="content">

@@ -2,7 +2,14 @@ import { useState } from "react";
 import Button from "../../components/button/button";
 import "./document-upload.scss";
 import Check from "../../components/check/check";
-import { MULTIPLE_TESTING_CENTERS, SINGLE_TESTING_CENTER } from "../../core/constants/document-upload";
+import {
+    DEFAULT_FORM_STATE,
+    DEFAULT_VALIDATION,
+    DEFAULT_VALIDATION_SCHEMA,
+    IMPORT_NAMES,
+    MULTIPLE_TESTING_CENTERS,
+    SINGLE_TESTING_CENTER,
+} from "../../core/constants/document-upload";
 import { ClientType, DocumentUploadFormState } from "../../core/interfaces/IDocumentUploadFormState";
 import { CheckColors } from "../../components/check/check.type";
 import { ButtonType, ButtonSize } from "../../components/button/button.type";
@@ -13,67 +20,22 @@ import ToleranceWindow from "./subcomponents/tolerance-window/tolerance-window";
 import UploadButton from "./subcomponents/upload-button/upload-button";
 import Modal from "../../components/modal/modal";
 import File from "../file/file";
-import FormControl from "../../core/FormControl";
-import Validators from "../../core/Validators";
-import { touchAllControls } from "../../utils/utils";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
 
 function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentUploadFormState) => void }) {
     // Modal open state
     const [isOpen, setIsOpen] = useState(true);
 
-    const validationSchema = Yup.object().shape({
-        importName: Yup.string().required("Import name is required!"),
-        file: Yup.mixed().required("File is required!"),
-        toleranceWindow: Yup.boolean(),
-        clientType: Yup.string().required("Client type is required!"),
-    });
-
-    const submit = (state: any) => {
-        setIsOpen(false);
-        onSubmit(state);
-    };
+    // Formik validation schema
+    const validationSchema = DEFAULT_VALIDATION_SCHEMA;
 
     return (
         <Formik
-            initialValues={{
-                importName: "",
-                file: null,
-                elapsedDates: false,
-                toleranceWindow: true,
-                toleranceWindowTime: null,
-                locationChecked: true,
-                splitSchedule: "true",
-                clientType: ClientType.MULTIPLE,
-                clientAssignation: MULTIPLE_TESTING_CENTERS,
-            }}
-            validate={(values) => {
-                const errors: any = {};
-
-                if (values.toleranceWindow && !values.toleranceWindowTime) {
-                    errors.toleranceWindowTime = "Tolerance window time is required!";
-                }
-
-                if (values.clientType === ClientType.SINGLE) {
-                    if (!values.clientAssignation[0].selectedClient) {
-                        errors.clientAssignation = "Client is required!";
-                    } else if (!values.clientAssignation[0].time) {
-                        errors.clientAssignation = "Time is required!";
-                    }
-                } else {
-                    values.clientAssignation.forEach((client: any, index: number) => {
-                        if (!client.selectedClient) {
-                            errors.clientAssignation = "Client is required!";
-                        } else if (!client.time) {
-                            errors.clientAssignation = "Time is required!";
-                        }
-                    });
-                }
-                return errors;
-            }}
+            initialValues={DEFAULT_FORM_STATE}
+            validate={DEFAULT_VALIDATION}
             onSubmit={(values, { resetForm }) => {
-                submit(values);
+                setIsOpen(false);
+                onSubmit(values);
                 resetForm();
             }}
             validationSchema={validationSchema}>
@@ -95,12 +57,7 @@ function DocumentUpload({ onSubmit }: { onSubmit: (docUploadFormState: DocumentU
                                     errors={errors.importName}
                                     touched={touched.importName}
                                     id="importName"
-                                    options={[
-                                        { value: "", label: "Select Import Name:" },
-                                        { value: "1", label: "Import 1" },
-                                        { value: "2", label: "Import 2" },
-                                        { value: "3", label: "Import 3" },
-                                    ]}></Dropdown>
+                                    options={IMPORT_NAMES}></Dropdown>
 
                                 <File errors={errors.file} touched={touched.file} id="file" />
 

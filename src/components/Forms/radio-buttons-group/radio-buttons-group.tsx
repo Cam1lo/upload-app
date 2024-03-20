@@ -3,18 +3,17 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import "./radio-buttons-group.scss";
-import { RadioButtonsGroupProps } from "./radio-buttons-group.type";
-import { useState } from "react";
+import { RadioButtonsGroupProps, RadioButtonsOption } from "./radio-buttons-group.type";
 import { useFormikContext } from "formik";
 
-export default function RadioButtonsGroup({ options, id, title }: any) {
+export default function RadioButtonsGroup({ options, id, title }: RadioButtonsGroupProps) {
     const { values, setFieldValue } = useFormikContext<any>();
 
     return (
         <FormControl className="radio">
             <span className="title">{title}</span>
             <RadioGroup value={values[id]} row className="options-group">
-                {options.map((option: any) => (
+                {options.map((option: RadioButtonsOption) => (
                     <FormControlLabel
                         key={option.value}
                         value={option.value}

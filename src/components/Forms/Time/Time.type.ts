@@ -1,8 +1,7 @@
-import IFormControl from "../../../core/interfaces/IFormControl";
-
 type TimeProps = {
     label: string;
-    formControl: IFormControl<Date | null>;
+    id?: string;
+    onChange?: (value: Date) => void;
 };
 
 export type { TimeProps };

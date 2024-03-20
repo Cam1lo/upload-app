@@ -1,15 +1,16 @@
 import { Field } from "formik";
 import "./dropdown.scss";
-import { DropdownOption } from "./dropdown.type";
+import { DropdownOption, DropdownProps } from "./dropdown.type";
 import { useState } from "react";
 
-function Dropdown({ errors, touched, options, id, bottomBorder = true, onChange = null }: any) {
+function Dropdown({ errors, touched, options, id, bottomBorder = true, onChange }: DropdownProps) {
     const [value, setValue] = useState("");
 
-    const handleChange = (e: any) => {
-        const value = e.target.value;
-        setValue(value);
-        onChange(value);
+    const handleChange = (value: string) => {
+        if (onChange) {
+            setValue(value);
+            onChange(value);
+        }
     };
 
     return (
@@ -20,7 +21,7 @@ function Dropdown({ errors, touched, options, id, bottomBorder = true, onChange 
                         <option
                             hidden={option.value === ""}
                             disabled={option.value === ""}
-                            onChange={onChange}
+                            onChange={() => onChange(option.value)}
                             key={option.value}
                             value={option.value}>
                             {option.label}

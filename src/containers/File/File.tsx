@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Progress from "../../components/progess/progress";
 import Upload from "../../components/upload/upload";
+import { FileProps } from "./file.type";
 
-function File({ errors, touched, id }: any) {
+function File({ errors, touched, id }: FileProps) {
     const [file, setFile] = useState<File | null>(null);
 
     return (

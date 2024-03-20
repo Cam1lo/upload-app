@@ -4,7 +4,7 @@ import Toggle from "../../../../components/forms/toggle/toggle";
 import "./tolerance-window.scss";
 import { ToleranceWindowProps } from "./tolerance-window.type";
 
-function ToleranceWindow({ errors, touched, toleranceWindowId, toleranceWindowTimeId }: any) {
+function ToleranceWindow({ errors, touched, toleranceWindowId, toleranceWindowTimeId }: ToleranceWindowProps) {
     const { values, setFieldValue } = useFormikContext<any>();
 
     return (
