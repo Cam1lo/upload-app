@@ -4,8 +4,10 @@ import FileIcon from "../../assets/icons/file.png";
 import { ButtonSize, ButtonType } from "../button/button.type";
 import { useFormikContext } from "formik";
 import { UploadProps } from "./upload.type";
+import { useState } from "react";
 
 function Upload({ onFileChange, id }: UploadProps) {
+    const [classes, setClasses] = useState("");
     const formikProps = useFormikContext();
 
     const triggerInputFile = () => {
@@ -23,6 +25,11 @@ function Upload({ onFileChange, id }: UploadProps) {
 
     const handleDragOver = (event: any) => {
         event.preventDefault();
+        setClasses("drag-over");
+    };
+
+    const handleDragLeave = () => {
+        setClasses("");
     };
 
     return (
@@ -30,7 +37,11 @@ function Upload({ onFileChange, id }: UploadProps) {
             <span className="title">Select a manifest that you'd like to import</span>
 
             <div className="upload">
-                <div className="drag-drop" onDrop={handleDrop} onDragOver={handleDragOver}>
+                <div
+                    className={`drag-drop ${classes}`}
+                    onDrop={handleDrop}
+                    onDragLeave={handleDragLeave}
+                    onDragOver={handleDragOver}>
                     <img src={FileIcon} alt="" />
                     <span>
                         Drag & Drop Here Or{" "}
